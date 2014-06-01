@@ -1,8 +1,8 @@
-    <?php
+      <?php
 
     /*
-    By : aa
-    atribut2 yang berlaku untuk $kaskus_baca :
+    By : INDRA OCTAMA
+    atribut2 yang berlaku untuk $detik_baca :
     **title (String)
     **link (String)
     **description (String)
@@ -11,10 +11,10 @@
     **guid (String)
     */
 
-    $xml = new SimpleXMLElement(‘http://www.kaskus.co.id/rss/forum/21;,NULL,TRUE);
+    $xml = new SimpleXMLElement(‘http://detik.feedsportal.com/c/33613/f/589693/index.rss&#8217;,NULL,TRUE);
 
-    /* deklarasi untuk menangkap parsing data dari situs kaskus.co.id */
-    $kaskus_baca = $xml[0]->channel[0]->item;
+    /* deklarasi untuk menangkap parsing data dari situs detik.com */
+    $detik_baca = $xml[0]->channel[0]->item;
 
     /* Menata Berita */
     $data = “<div align =’left’ width=’200px’>”;
