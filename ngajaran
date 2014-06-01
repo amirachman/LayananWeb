@@ -1,52 +1,30 @@
-<html>
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type='text/javascript'>
- 
-        $(document).ready(function()
-        {
-             
-            $.ajax({
-                type: "GET",
-                url: "plant_catalog.xml",
-                dataType: "xml",
-                beforeSend: function(){
-                    $("#image").html("<img src='ajax-loader.gif'");
-                },
-                success: function(xml) {
-                    $(xml).find("PLANT").each(function(){
-                        $("#image").hide();
-                         
-                        var data_common = $(this).find("COMMON").text();
-                        $("#v_common ul").append("<li>"+ data_common +"</li>");
-                         
-                        var data_botanical = $(this).find("BOTANICAL").text();
-                        $("#v_botanical ul").append("<li>"+ data_botanical +"</li>");
-                    });
-                     
-                }
-            });
-             
-        });
- 
-    </script>
-</head>
- 
-<body>
-  <span id='image'></span><br />
-  Common :
-  <div id='v_common'>
-    <ul>
-         
-    </ul>
-  </div>
-   
-  Botanical :
-  <div id='v_botanical'>
-    <ul>
-         
-    </ul>
-  </div>
-</body>
-     
-</html>
+    <?php
+
+    /*
+    By : aa
+    atribut2 yang berlaku untuk $kaskus_baca :
+    **title (String)
+    **link (String)
+    **description (String)
+    **enclosure (array)
+    **pubDate (String)
+    **guid (String)
+    */
+
+    $xml = new SimpleXMLElement(‘http://www.kaskus.co.id/rss/forum/21;,NULL,TRUE);
+
+    /* deklarasi untuk menangkap parsing data dari situs kaskus.co.id */
+    $kaskus_baca = $xml[0]->channel[0]->item;
+
+    /* Menata Berita */
+    $data = “<div align =’left’ width=’200px’>”;
+    echo “========================================================================”;
+    for($i = 0; $i < count($detik_baca);$i++){
+    $data .= “<h4><a href=’”. $detik_baca[$i]->guid.”‘>”.$detik_baca[$i]->title.”</a></h4>”;
+    $data .= “<p align=’justify’>”.strip_tags($detik_baca[$i]->description).”</p>”;
+    $data .= “<p size=’5′>”.$detik_baca[$i]->pubDate.”</p>”;
+    $data .= “======================================================================== \n”;
+    }
+    $data .= “</div>”;
+    echo $data;
+    ?>
